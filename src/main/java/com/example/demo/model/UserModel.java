@@ -2,6 +2,7 @@ package com.example.demo.model;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
@@ -15,6 +16,7 @@ public class UserModel {
 	@Column(name = "username")
 	private String username;
 
+	@JsonIgnore
 	@Column(name = "password")
 	private String password;
 	
@@ -138,5 +140,6 @@ public class UserModel {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+
 
 }

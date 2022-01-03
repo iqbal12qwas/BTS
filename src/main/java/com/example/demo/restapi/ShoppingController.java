@@ -23,20 +23,20 @@ import com.example.demo.model.ShoppingModel;
 import com.example.demo.services.ShoppingService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/shopping")
 public class ShoppingController {
 
 	@Autowired
 	private ShoppingService services;
 
 	// Get All Shopping
-	@GetMapping("/shopping")
+	@GetMapping
 	public List<ShoppingModel> list() {
 		return services.listAll();
 	}
 
 	// Get Detail Shopping By Id
-	@GetMapping("/shopping/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<ShoppingModel> get(@PathVariable Long id) {
 		try {
 			ShoppingModel shopping = services.get(id);
@@ -47,7 +47,7 @@ public class ShoppingController {
 	}
 
 	// Post Shopping
-	@PostMapping(value = "/shopping", consumes = "application/json")
+	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseShopping save(@RequestBody ShoppingDto shoppings) throws NoSuchAlgorithmException {
 		ResponseShopping response = new ResponseShopping();
@@ -62,13 +62,13 @@ public class ShoppingController {
 	}
 
 	// Delete Shopping
-	@DeleteMapping("/shopping/{id}")
+	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Long id) {
 		services.delete(id);
 	}
 
 	// Update Shopping
-	@PutMapping(value = "/shopping/{id}", consumes = "application/json")
+	@PutMapping(value = "/{id}", consumes = "application/json")
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseShopping update(@RequestBody ShoppingDto shopping, @PathVariable Long id)
 			throws NoSuchAlgorithmException {

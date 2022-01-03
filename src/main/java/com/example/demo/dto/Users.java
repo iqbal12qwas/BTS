@@ -1,8 +1,12 @@
 package com.example.demo.dto;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
+
 public class Users {
 	
-
 	private long id;
 	private String username;
 	private String password;
@@ -50,8 +54,12 @@ public class Users {
 		this.username = username;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getPassword() throws NoSuchAlgorithmException {
+		MessageDigest digest = MessageDigest.getInstance("SHA-256");
+		byte[] myHashBytes = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+		String myHash = Base64.getEncoder().encodeToString(myHashBytes);
+		
+		return myHash;
 	}
 
 	public void setPassword(String password) {
